@@ -1,11 +1,11 @@
 <template>
   <v-footer padless fixed>
-    <v-row justify="center" no-gutters>
-      <v-col class="secondary pt-5 text-center grey--text" cols="12">
+    <v-row no-gutters>
+      <v-col class="light-blue pt-5 text-center white--text" cols="12">
         Copyright® {{ new Date().getFullYear() }} — <strong>Tasks</strong>
       </v-col>
       <v-col
-        class="secondary pb-5 text-center grey--text text-caption"
+        class="light-blue pb-5 text-center white--text text-caption"
         cols="12"
       >
         <strong>{{ version }}</strong> -
@@ -14,7 +14,7 @@
           <v-btn
             icon
             color="white"
-            href="https://github.com/huogerac/crud-js-materialize-vuejs"
+            href="https://github.com/GabyVictoria0122?tab=repositories"
           >
             <v-icon>fa-brands fa-github</v-icon>
           </v-btn>

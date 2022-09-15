@@ -1,9 +1,9 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
+  <v-container fill-height>
+    <v-row justify="center" align="center" class="text-center">
       <v-col cols="12">
         <v-img
-          :src="require('../assets/logo.svg')"
+          :src="require('../assets/logoTodo.png')"
           class="my-3"
           contain
           height="200"
@@ -19,7 +19,13 @@
           Gerenciando tarefas aprendendo VueJS + Vuetify + API Mock
         </p>
         <p>
-          <v-btn x-large rounded color="primary" dark :to="{ name: 'login' }">
+          <v-btn
+            x-large
+            rounded
+            color="light-blue "
+            dark
+            :to="{ name: 'login' }"
+          >
             Iniciar
           </v-btn>
         </p>

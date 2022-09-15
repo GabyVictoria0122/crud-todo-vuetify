@@ -6,7 +6,7 @@ function sleep(ms) {
 
 function getUser(username, password) {
   const user = data.users.find((user) => user.username === username)
-  if (!user || password != username) {
+  if (!user || password != 'apimock') {
     console.log('login invalido!')
     return
   }

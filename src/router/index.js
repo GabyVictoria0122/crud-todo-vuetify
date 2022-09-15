@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import PublicLayout from '@/layouts/PublicLayout.vue'
 import PrivateLayout from '@/layouts/PrivateLayout.vue'
 import HomeView from '@/views/HomeView.vue'
+import RegisterUserView from '../views/RegisterUserView.vue'
 import TasksListView from '@/views/TasksListView.vue'
 import TasksUpdateView from '@/views/TasksUpdateView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -23,6 +24,11 @@ const routes = [
         path: 'login',
         name: 'login',
         component: LoginView,
+      },
+      {
+        path: 'registar',
+        name: 'registro',
+        component: RegisterUserView,
       },
     ],
   },
