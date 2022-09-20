@@ -104,6 +104,7 @@ export default {
         .then((user) => {
           console.log('login ok', user)
           this.saveLoggedUser(user)
+          debugger
           this.$router.push({ name: 'taskSummary' })
         })
         .catch((error) => {
@@ -116,6 +117,7 @@ export default {
         })
     },
     saveLoggedUser(user) {
+      window.localStorage.setItem('user', JSON.stringify(user))
       window.localStorage.setItem('loggedUser', user.id)
       window.localStorage.setItem('loggedUserToken', user.token)
     },
