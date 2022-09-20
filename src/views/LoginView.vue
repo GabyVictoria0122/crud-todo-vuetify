@@ -1,10 +1,10 @@
 <template>
-  <v-container fill-height>
+  <v-container>
     <!-- snackbar -->
     <v-snackbar v-model="snackbar.show" :value="true" absolute left shaped top>
       {{ snackbar.message }}
     </v-snackbar>
-    <v-row align="center" class="text-center">
+    <v-row class="text-center pa-16 ma-16">
       <v-col md="6" offset-md="3">
         <v-card class="pa-4 rounded mt-6" outlined tile>
           <h2>Login</h2>
@@ -29,6 +29,7 @@
               counter
               outlined
               @click:append="show1 = !show1"
+              v-on:keyup.enter="login"
             ></v-text-field>
 
             <v-row class="d-flex justify-space-around">
@@ -72,7 +73,6 @@ import AuthApi from '@/api/auth.api.js'
 export default {
   data: () => ({
     loading: false,
-
     valid: true,
     name: '',
     show1: false,
@@ -101,9 +101,10 @@ export default {
       this.loading = true
       this.$refs.form.validate()
       AuthApi.login(this.username, this.password)
-        .then((resp) => {
-          console.log('login ok', resp)
-          this.$router.push({ name: 'taskList' })
+        .then((user) => {
+          console.log('login ok', user)
+          this.saveLoggedUser(user)
+          this.$router.push({ name: 'taskSummary' })
         })
         .catch((error) => {
           console.log('login falhou', error)
@@ -114,11 +115,9 @@ export default {
           this.loading = false
         })
     },
-    reset() {
-      this.$refs.form.reset()
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation()
+    saveLoggedUser(user) {
+      window.localStorage.setItem('loggedUser', user.id)
+      window.localStorage.setItem('loggedUserToken', user.token)
     },
   },
 }

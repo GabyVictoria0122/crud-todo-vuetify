@@ -6,9 +6,16 @@
           <h2>Please Sing Up to continue</h2>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field
-              v-model="name"
-              :rules="nameRules"
-              label="Name"
+              v-model="fullName"
+              :rules="fullNameRules"
+              label="Full Name"
+              required
+            ></v-text-field>
+
+            <v-text-field
+              v-model="username"
+              :rules="usernameRules"
+              label="Usuário"
               required
             ></v-text-field>
 
@@ -22,28 +29,34 @@
             <v-text-field
               v-model="password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min]"
+              :rules="[passwordRules.required, passwordRules.min]"
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
               label="Create Password"
-              hint="At least 8 characters"
-              counter
-              @click:append="show1 = !show1"
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min]"
-              :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              label="Confirm Your Password"
-              hint="At least 8 characters"
+              hint="At least 6 characters"
               counter
               @click:append="show1 = !show1"
             ></v-text-field>
 
-            <v-btn :disabled="!valid" class="mr-4" @click="login">
-              Continue
+            <v-text-field
+              v-model="passwordConfirm"
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[passworConfirmRules]"
+              :type="show2 ? 'text' : 'password'"
+              name="input-10-1"
+              label="Confirm Your Password"
+              hint="At least 6 characters"
+              counter
+              @click:append="show2 = !show2"
+            ></v-text-field>
+
+            <v-btn
+              :loading="loading"
+              :disabled="!valid"
+              class="mr-4"
+              @click="signup"
+            >
+              Continues
             </v-btn>
           </v-form>
         </v-card>
@@ -53,41 +66,56 @@
 </template>
 
 <script>
+import AuthApi from '@/api/auth.api.js'
+
 export default {
   data: () => ({
+    loading: false,
     valid: true,
-    name: '',
-    nameRules: [
+    fullName: '',
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    show1: false,
+    show2: false,
+    fullNameRules: [
       (v) => !!v || 'Name is required',
       (v) =>
         (v && v.length >= 4) || 'The name must be longer than 4 characters',
     ],
-    show1: false,
-    password: '',
-    rules: {
-      required: (value) => !!value || 'Required.',
-      min: (v) => v.length >= 8 || 'Min 8 characters',
-      // emailMatch: () => `The email and password you entered don't match`,
-    },
-    email: '',
+    usernameRules: [
+      (v) => !!v || 'Username is required',
+      (v) =>
+        (v && v.length >= 4) || 'The username must be longer than 4 characters',
+    ],
     emailRules: [
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
-
-    checkbox: false,
+    passwordRules: {
+      required: (value) => !!value || 'Required.',
+      min: (v) => v.length >= 6 || 'Min 6 characters',
+      // emailMatch: () => `The email and password you entered don't match`,
+    },
   }),
 
   methods: {
-    login() {
-      this.$refs.form.validate()
-      console.log('@click no ')
+    signup() {
+      AuthApi.signup(this.fullName, this.username, this.email, this.password)
+        .then((data) => {
+          console.log('data', data)
+          this.$router.push({ name: 'login' })
+        })
+        .catch((error) => {
+          console.log('chegou um erro aqui gente:', error)
+        })
     },
-    reset() {
-      this.$refs.form.reset()
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation()
+    passworConfirmRules() {
+      if (this.password != this.passwordConfirm) {
+        return 'Passwords must be the same'
+      }
+      return true
     },
   },
 }

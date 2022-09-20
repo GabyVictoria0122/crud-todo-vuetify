@@ -1,7 +1,12 @@
 const data = require('../data')
+const crypto = require('node:crypto')
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function getMaxId(items) {
+  return Math.max(...items.map((item) => item.id))
 }
 
 function getUser(username, password) {
@@ -13,15 +18,15 @@ function getUser(username, password) {
   return user
 }
 
-function addUser(username, name, email, password) {
+function addUser(fullName, username, email, password) {
   if (!password) {
     throw 'Invalid password!'
   }
-  const id = data.users.length + 1
+  const id = getMaxId(data.users) + 1
   const newUser = {
     id,
+    fullName,
     username,
-    name,
     email,
   }
   data.users.push(newUser)
@@ -36,16 +41,38 @@ module.exports = {
       if (!user) {
         res.status(404).end()
       }
+      // Gera Token para sessão de login/Autorização
+      user.token = crypto.randomUUID()
       res.send(user)
     })
   },
   add: (req, res) => {
     try {
-      const { username, name, email, password } = req.body
-      const newUser = addUser(username, name, email, password)
+      const { fullName, username, email, password } = req.body
+
+      if (fullName.length <= 3) {
+        throw 'Nome inválido'
+      }
+      const newUser = addUser(fullName, username, email, password)
       res.send(newUser)
     } catch (error) {
-      res.status(404).end(error)
+      res.status(400).end(error)
     }
+  },
+  loginRequired: (req, res) => {
+    const userid = req.headers['x-authorization-userid']
+    const usertoken = req.headers['x-authorization-usertoken']
+    if (!userid || !usertoken) {
+      res.status(401).end('Header de segurança não encontrado')
+      console.log('aqui1')
+      return false
+    }
+    const user = data.users.find((u) => u.id == userid)
+    if (!user || user.token != usertoken) {
+      res.status(401).end('Header de segurança inválido')
+      console.log('aqui1')
+      return false
+    }
+    return user
   },
 }

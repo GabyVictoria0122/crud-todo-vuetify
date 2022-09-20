@@ -3,7 +3,8 @@
     "id": 1,
     "name": "Jorge Oliva",
     "username": "jorge",
-    "email": "jorgeo@example.com"
+    "email": "jorgeo@example.com",
+    "password": "jorgesenha"
   },
   {
     "id": 2,

@@ -6,6 +6,7 @@ import HomeView from '@/views/HomeView.vue'
 import RegisterUserView from '../views/RegisterUserView.vue'
 import TasksListView from '@/views/TasksListView.vue'
 import TasksUpdateView from '@/views/TasksUpdateView.vue'
+import TasksSummaryView from '@/views/TasksSummaryView.vue'
 import LoginView from '@/views/LoginView.vue'
 
 Vue.use(VueRouter)
@@ -42,9 +43,14 @@ const routes = [
         component: TasksUpdateView,
       },
       {
-        path: '',
+        path: 'list',
         name: 'taskList',
         component: TasksListView,
+      },
+      {
+        path: 'summary',
+        name: 'taskSummary',
+        component: TasksSummaryView,
       },
     ],
   },

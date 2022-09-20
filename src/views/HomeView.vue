@@ -1,7 +1,7 @@
 <template>
-  <v-container fill-height>
-    <v-row justify="center" align="center" class="text-center">
-      <v-col cols="12">
+  <v-container>
+    <v-row class="text-center ma-16">
+      <v-col class="pt-16" cols="12">
         <v-img
           :src="require('../assets/logoTodo.png')"
           class="my-3"
@@ -20,6 +20,7 @@
         </p>
         <p>
           <v-btn
+            class="ma-5"
             x-large
             rounded
             color="light-blue "

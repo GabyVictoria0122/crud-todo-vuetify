@@ -4,10 +4,7 @@
       <v-col class="light-blue pt-5 text-center white--text" cols="12">
         Copyright® {{ new Date().getFullYear() }} — <strong>Tasks</strong>
       </v-col>
-      <v-col
-        class="light-blue pb-5 text-center white--text text-caption"
-        cols="12"
-      >
+      <v-col class="light-blue text-center white--text text-caption" cols="12">
         <strong>{{ version }}</strong> -
         {{ nodeEnv }}
         <p>
