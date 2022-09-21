@@ -1,32 +1,38 @@
 <template>
-  <v-main class="overflow-hidden mt-4">
+  <v-main class="mt-4">
     <v-container>
       <v-row>
-        <v-col class="pa-3" cols="12" v-for="task in tasks" :key="task.id">
-          <v-card elevation="17" shaped>
-            <v-card-text>
-              <div>#{{ task.date }}</div>
-              <p class="ma-0 pa-0 text-h5 text--primary">{{ task.title }}</p>
-              <span class="chip #f8bbd0 pink lighten-4">{{
-                task.project
-              }}</span>
-            </v-card-text>
+        <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="message"
+            label="Create a Task"
+            outlined
+            clearable
+          ></v-text-field>
+        </v-col>
+        <v-col
+          justify="center"
+          class="pa-3"
+          cols="12"
+          v-for="task in tasks"
+          :key="task.id"
+        >
+          <v-list-item>
+            <template v-slot:default="{ active }">
+              <v-list-item-action>
+                <v-checkbox :input-value="active"></v-checkbox>
+              </v-list-item-action>
 
-            <v-card-actions>
-              <v-list-item class="grow">
-                <v-btn
-                  x-small
-                  icon
-                  color="grey"
-                  :to="{ name: 'taskUpdate', params: { id: task.id } }"
-                  ><v-icon>fas fa-pen fa-xs</v-icon></v-btn
+              <v-list-item-content>
+                <v-list-item-title>{{ task.title }}</v-list-item-title>
+                <v-list-item-subtitle
+                  >Notify me about updates to apps or games that I downloaded
+                  Notify me about updates to apps or games that I
+                  downloaded</v-list-item-subtitle
                 >
-                <v-btn x-small icon color="grey" @click="removerTask(task.id)"
-                  ><v-icon>far fa-trash-alt fa-xs</v-icon></v-btn
-                >
-              </v-list-item>
-            </v-card-actions>
-          </v-card>
+              </v-list-item-content>
+            </template>
+          </v-list-item>
         </v-col>
       </v-row>
     </v-container>
@@ -56,6 +62,7 @@ export default {
   },
   created() {
     this.getTasks()
+    console.log('ta batendo duss vezes?')
   },
 }
 </script>

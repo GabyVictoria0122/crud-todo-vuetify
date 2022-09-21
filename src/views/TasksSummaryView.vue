@@ -1,7 +1,7 @@
 <template>
-  <v-main class="overflow-hidden mt-4">
+  <v-main>
     <v-container>
-      <v-row justify="center" class="text-center pa-16 ma-16">
+      <v-row justify="center" class="text-center">
         <v-col cols="12">
           <h2 class="display-2 font-weight-bold mb-3">Summary Panel</h2>
         </v-col>

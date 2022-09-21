@@ -1,8 +1,8 @@
 <template>
-  <v-main class="gradiente-bg">
+  <div class="gradiente-bg">
     <router-view />
     <PageFooter />
-  </v-main>
+  </div>
 </template>
 
 <script>

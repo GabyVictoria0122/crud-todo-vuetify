@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless fixed>
+  <v-footer padless fixed app>
     <v-row no-gutters>
       <v-col class="light-blue pt-5 text-center white--text" cols="12">
         Copyright® {{ new Date().getFullYear() }} — <strong>Tasks</strong>

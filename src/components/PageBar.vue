@@ -1,27 +1,35 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app>
-      <v-list>
-        <v-list-item class="d-flex justify-center pt-6 mt-6">
-          <v-list-item-avatar>
-            <v-icon color="light-blue">fa-regular fa-user</v-icon>
-          </v-list-item-avatar>
-        </v-list-item>
+      <v-img
+        src="https://picsum.photos/1920/1080?random"
+        gradient="to top right, rgba(25,32,72,.7), rgb(0,191,255)"
+        height="240"
+        dark
+        class="pt-5 text-center"
+      >
+        <v-list>
+          <v-list-item class="d-flex justify-center">
+            <v-list-item-avatar>
+              <v-img src="https://picsum.photos/1920/1080?random"></v-img>
+            </v-list-item-avatar>
+          </v-list-item>
 
-        <v-list-item>
-          <v-list-item-content class="text-center">
-            <v-list-item-title class="text-h4">
-              {{ getLoggedUser.username }}
-            </v-list-item-title>
-            <v-list-item-title class="text-h5">
-              {{ getLoggedUser.fullName }}
-            </v-list-item-title>
-            <v-list-item-subtitle>{{
-              getLoggedUser.email
-            }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+          <v-list-item>
+            <v-list-item-content class="text-center">
+              <v-list-item-title class="text-h5">
+                {{ getLoggedUser.username }}
+              </v-list-item-title>
+              <v-list-item-title class="text-h6">
+                {{ getLoggedUser.fullName }}
+              </v-list-item-title>
+              <v-list-item-subtitle>{{
+                getLoggedUser.email
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-img>
 
       <v-divider class="light-blue"></v-divider>
 
@@ -39,11 +47,12 @@
     </v-navigation-drawer>
 
     <v-app-bar
-      absolute
+      app
       color="light-blue"
+      prominent
+      height="185"
       dark
       shrink-on-scroll
-      prominent
       src="https://picsum.photos/1920/1080?random"
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-3"
@@ -60,10 +69,13 @@
         class="white--text text-caption"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <v-app-bar-title>TODO Vuetify </v-app-bar-title>
+
+      <v-app-bar-title class="mt-16">
+        TODO Vuetify
+        <input-bar />
+      </v-app-bar-title>
 
       <v-spacer></v-spacer>
-
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -76,10 +88,7 @@
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
-
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+    <router-view></router-view>
   </v-app>
 </template>
 

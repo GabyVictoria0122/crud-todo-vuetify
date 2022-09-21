@@ -1,9 +1,8 @@
 <template>
-  <v-main>
+  <div>
     <PageBar />
-    <router-view />
     <PageFooter />
-  </v-main>
+  </div>
 </template>
 
 <script>
