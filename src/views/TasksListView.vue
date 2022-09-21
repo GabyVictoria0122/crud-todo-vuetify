@@ -1,8 +1,8 @@
 <template>
-  <v-main class="mt-4">
+  <v-main class="overflow-hidden mt-4">
     <v-container>
-      <v-row>
-        <v-col cols="12" sm="6">
+      <v-row class="pa-16">
+        <v-col cols="12">
           <v-text-field
             v-model="message"
             label="Create a Task"
